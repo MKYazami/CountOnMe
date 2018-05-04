@@ -79,8 +79,17 @@ class ViewController: UIViewController {
         calculateTotal()
     }
 
-
+    
+    @IBAction func clearDisplay() {
+        textView.text = ""
+    }
+    
     // MARK: - Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        clearDisplay()
+    }
 
     func addNewNumber(_ newNumber: Int) {
         if let stringNumber = stringNumbers.last {
