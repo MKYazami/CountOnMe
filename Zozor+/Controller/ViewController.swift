@@ -80,15 +80,17 @@ class ViewController: UIViewController {
     }
 
     
-    @IBAction func clearDisplay() {
+    @IBAction func clearScreenDisplay() {
         textView.text = ""
+        clear()
     }
     
     // MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearDisplay()
+        //Start the application with clear screen
+        textView.text = ""
     }
 
     func addNewNumber(_ newNumber: Int) {
