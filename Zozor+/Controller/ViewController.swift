@@ -17,13 +17,9 @@ class ViewController: UIViewController {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
                 if stringNumbers.count == 1 {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Démarrez un nouveau calcul !", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
+                    errorMessage(alertTitle: "Erreur !", message: "Démarrez un nouveau calcul !", actionTitle: "Ok")
                 } else {
-                    let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                    self.present(alertVC, animated: true, completion: nil)
+                    errorMessage(alertTitle: "Erreur !", message: "Entrez une expression correcte !", actionTitle: "Ok")
                 }
                 return false
             }
@@ -34,9 +30,7 @@ class ViewController: UIViewController {
     var canAddOperator: Bool {
         if let stringNumber = stringNumbers.last {
             if stringNumber.isEmpty {
-                let alertVC = UIAlertController(title: "Zéro!", message: "Expression incorrecte !", preferredStyle: .alert)
-                alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-                self.present(alertVC, animated: true, completion: nil)
+                errorMessage(alertTitle: "Erreur !", message: "Expression incorrecte !", actionTitle: "Ok")
                 return false
             }
         }
@@ -138,5 +132,17 @@ class ViewController: UIViewController {
         stringNumbers = [String()]
         operators = ["+"]
         index = 0
+    }
+    
+    /// Allows to customize an UIAlert
+    ///
+    /// - Parameters:
+    ///   - alertTitle: The title of the alert to present (As : error, warning…)
+    ///   - message: Message explaining the error
+    ///   - actionTitle: The title to present to valid the alert message (As : Ok, I understand…)
+    private func errorMessage(alertTitle: String, message: String, actionTitle: String) {
+        let alertMessage = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: actionTitle, style: .cancel, handler: nil))
+        self.present(alertMessage, animated: true, completion: nil)
     }
 }
