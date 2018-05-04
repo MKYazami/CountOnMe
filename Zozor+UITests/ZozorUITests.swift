@@ -8,7 +8,7 @@
 
 import XCTest
 
-class Zozor_UITests: XCTestCase {
+class ZozorUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

@@ -9,7 +9,7 @@
 import XCTest
 //@testable import Zozor_
 
-class Zozor_Tests: XCTestCase {
+class ZozorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

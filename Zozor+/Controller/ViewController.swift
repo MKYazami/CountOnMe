@@ -43,7 +43,6 @@ class ViewController: UIViewController {
         return true
     }
 
-
     // MARK: - Outlets
 
     @IBOutlet weak var textView: UITextView!
@@ -52,10 +51,8 @@ class ViewController: UIViewController {
     // MARK: - Action
 
     @IBAction func tappedNumberButton(_ sender: UIButton) {
-        for (i, numberButton) in numberButtons.enumerated() {
-            if sender == numberButton {
+        for (i, numberButton) in numberButtons.enumerated() where sender == numberButton {
                 addNewNumber(i)
-            }
         }
     }
 
@@ -79,7 +76,6 @@ class ViewController: UIViewController {
         calculateTotal()
     }
 
-    
     @IBAction func clearScreenDisplay() {
         textView.text = ""
         clear()
@@ -102,6 +98,7 @@ class ViewController: UIViewController {
         updateDisplay()
     }
 
+    //########### Move to Model
     func calculateTotal() {
         if !isExpressionCorrect {
             return
@@ -118,10 +115,11 @@ class ViewController: UIViewController {
             }
         }
 
-        textView.text = textView.text + "=\(total)"
+        textView.text! += "=\(total)"
 
         clear()
     }
+    //############ ./ Move to Model
 
     func updateDisplay() {
         var text = ""
