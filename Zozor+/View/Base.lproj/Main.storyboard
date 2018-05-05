@@ -205,6 +205,9 @@
                                         <state key="normal" title="×">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="multiply" destination="BYZ-38-t0r" eventType="touchUpInside" id="JfJ-Xi-hIu"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mD5-lx-aUM" userLabel="÷">
                                         <rect key="frame" x="182" y="0.0" width="45.5" height="63"/>
@@ -213,6 +216,9 @@
                                         <state key="normal" title="÷">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="divide" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bs6-vy-cRL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D9e-qZ-ZAT">
                                         <rect key="frame" x="242.5" y="0.0" width="45.5" height="63"/>
