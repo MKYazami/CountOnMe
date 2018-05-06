@@ -21,12 +21,12 @@ class Calculation {
     ///   - operators: Array of coming operators from the calculator keyboard
     ///   - calculationExpression: The calculation expression done
     /// - Returns: The calculation expression & result in form of string
-    func performCalculation(stringNumbers: [String], operators: [String]) -> String {
+    func performCalculation(stringNumbers: [String], mathematicalOperators: [String]) -> String {
         var result: Float = 0.0
         for (stringNumbersIndex, stringNumber) in stringNumbers.enumerated() {
             if let number = Float(stringNumber) {
                 // operators share the same stringNumbers index, because the index sequence is the same for both
-                switch operators[stringNumbersIndex] {
+                switch mathematicalOperators[stringNumbersIndex] {
                 case "+":
                     result += number
                 case "-":

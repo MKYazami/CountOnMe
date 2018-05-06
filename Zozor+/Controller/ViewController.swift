@@ -132,9 +132,9 @@ class ViewController: UIViewController {
         }
         
         //Getting result from the model
-        let result: String = calculation.performCalculation(stringNumbers: stringNumbers, operators: mathematicalOperators)
+        let result: String = calculation.performCalculation(stringNumbers: stringNumbers, mathematicalOperators: mathematicalOperators)
         
-        calculatorScreenView.text! += "=\n\(result)"
+        calculatorScreenView.text! += "\n=\n\(result)"
 
         resetNumbersAndOperators()
     }
