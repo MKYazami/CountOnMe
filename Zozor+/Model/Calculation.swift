@@ -44,7 +44,7 @@ class Calculation {
             }
         }
         
-        return "\(calculationExpression)=\(result)"
+        return "\(calculationExpression)=\n\(result)"
     }
     
     /// Verify if a divisor is different from zero
