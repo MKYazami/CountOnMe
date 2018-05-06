@@ -21,11 +21,12 @@ class Calculation {
     ///   - operators: Array of coming operators from the calculator keyboard
     ///   - calculationExpression: The calculation expression done
     /// - Returns: The calculation expression & result in form of string
-    func performCalculation(stringNumbers: [String], operators: [String], calculationExpression: String) -> String {
+    func performCalculation(stringNumbers: [String], operators: [String]) -> String {
         var result: Float = 0.0
-        for (i, stringNumber) in stringNumbers.enumerated() {
+        for (stringNumbersIndex, stringNumber) in stringNumbers.enumerated() {
             if let number = Float(stringNumber) {
-                switch operators[i] {
+                // operators share the same stringNumbers index, because the index sequence is the same for both
+                switch operators[stringNumbersIndex] {
                 case "+":
                     result += number
                 case "-":
@@ -44,7 +45,7 @@ class Calculation {
             }
         }
         
-        return "\(calculationExpression)=\n\(result)"
+        return "\(result)"
     }
     
     /// Verify if a divisor is different from zero
