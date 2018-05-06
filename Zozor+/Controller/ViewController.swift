@@ -9,38 +9,10 @@
 import UIKit
 
 class ViewController: UIViewController {
-    // MARK: - Properties
-    private var calculation = Calculation()
-    private var stringNumbers: [String] = [String()]
-    private var operators: [String] = ["+"]
-    private var index = 0
-    private var isExpressionCorrect: Bool {
-        if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
-                if stringNumbers.count == 1 {
-                    errorMessage(alertTitle: "Erreur !", message: "Démarrez un nouveau calcul !", actionTitle: "Ok")
-                } else {
-                    errorMessage(alertTitle: "Erreur !", message: "Entrez une expression correcte !", actionTitle: "Ok")
-                }
-                return false
-            }
-        }
-        return true
-    }
-
-    private var canAddOperator: Bool {
-        if let stringNumber = stringNumbers.last {
-            if stringNumber.isEmpty {
-                errorMessage(alertTitle: "Erreur !", message: "Expression incorrecte !", actionTitle: "Ok")
-                return false
-            }
-        }
-        return true
-    }
 
     // MARK: - Outlets
 
-    @IBOutlet weak private var textView: UITextView!
+    @IBOutlet weak private var calculatorScreenView: UITextView!
     @IBOutlet private var numberButtons: [UIButton]!
 
     // MARK: - Action
@@ -53,35 +25,76 @@ class ViewController: UIViewController {
 
     @IBAction private func plus() {
         if canAddOperator {
-            makeOperation(mathematicalOperator: "+")
+            addMathematicalOperator(mathematicalOperator: "+")
         }
     }
 
     @IBAction private func minus() {
         if canAddOperator {
-            makeOperation(mathematicalOperator: "-")
+            addMathematicalOperator(mathematicalOperator: "-")
         }
     }
     
     @IBAction private func multiply() {
         if canAddOperator {
-            makeOperation(mathematicalOperator: "x")
+            addMathematicalOperator(mathematicalOperator: "x")
         }
     }
     
     @IBAction private func divide() {
         if canAddOperator {
-            makeOperation(mathematicalOperator: "/")
+            addMathematicalOperator(mathematicalOperator: "/")
         }
     }
     
     @IBAction private func equal() {
-        displayCalculationAndTotalResult()
+        displayCalculationAndResult()
     }
 
     @IBAction private func clearScreenDisplay() {
-        textView.text = ""
-        clear()
+        calculatorScreenView.text = ""
+        resetNumbersAndOperators()
+    }
+    
+    // MARK: - Properties
+    
+    // Access to Calculation type
+    private var calculation = Calculation()
+    
+    // Contains numbers coming from calculator keyboard
+    private var stringNumbers: [String] = [""]
+    
+    // Contains mathematical operators coming from calculator keyboard
+    private var mathematicalOperators: [String] = ["+"]
+    
+    /// Checks if the expression is correct to preform calculation
+    private var isExpressionCorrect: Bool {
+        if let stringNumber = stringNumbers.last {
+            // Checks if the last item is empty (ex: [""])
+            if stringNumber.isEmpty {
+                // Checks if the array has only one item (empty) and ask the user to start a new calculation
+                // Because when we start the app or complete a calculation stringNumbers = [""] (1 item empty)
+                if stringNumbers.count == 1 {
+                    errorMessage(alertTitle: "Erreur !", message: "Démarrez un nouveau calcul !", actionTitle: "Ok")
+                } else {
+                    // Else warns the user that the calculation is not completed when the user entre equal button (ex: 3 + =)
+                    errorMessage(alertTitle: "Erreur !", message: "Entrez une expression correcte !", actionTitle: "Ok")
+                }
+                return false
+            }
+        }
+        return true
+    }
+    
+    /// Checks if a number has been entered by the user just before using an operator
+    private var canAddOperator: Bool {
+        if let stringNumber = stringNumbers.last {
+            if stringNumber.isEmpty {
+                errorMessage(alertTitle: "Erreur !", message: "Expression incorrecte !", actionTitle: "Ok")
+                return false
+            }
+        }
+        return true
     }
     
     // MARK: - Methods
@@ -89,55 +102,61 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Start the application with clear screen
-        textView.text = ""
+        calculatorScreenView.text = ""
     }
 
+    /// Adds the new number to the stringNumbers array
+    ///
+    /// - Parameter newNumber: new number to add
     private func addNewNumber(_ newNumber: Int) {
-        if var stringNumber = stringNumbers.last {
-            stringNumber += "\(newNumber)"
-            stringNumbers[stringNumbers.count-1] = stringNumber
-        }
-        updateDisplay()
+        guard var stringNumber = stringNumbers.last else { return }
+        stringNumber += "\(newNumber)"
+        stringNumbers[stringNumbers.count-1] = stringNumber
+        
+        updateScreenDisplay()
+    }
+    
+    /// Adds mathematical operator to mathematicalOperators array
+    ///
+    /// - Parameter mathematicalOperator: "+", "-", "x" or "/"…
+    private func addMathematicalOperator(mathematicalOperator: String) {
+        mathematicalOperators.append(mathematicalOperator)
+        stringNumbers.append("")
+        updateScreenDisplay()
     }
 
-    func displayCalculationAndTotalResult() {
+    /// Displays the calculation expression and result
+    private func displayCalculationAndResult() {
         if !isExpressionCorrect {
             return
         }
         
-        textView.text! = calculation.performTotalCalculation(stringNumbers: stringNumbers, operators: operators, calculation: textView.text!)
+        calculatorScreenView.text! = calculation.performCalculation(stringNumbers: stringNumbers, operators: mathematicalOperators, calculationExpression: calculatorScreenView.text!)
 
-        clear()
+        resetNumbersAndOperators()
     }
 
-    private func updateDisplay() {
-        var text = ""
-        for (i, stringNumber) in stringNumbers.enumerated() {
-            // Add operator
-            if i > 0 {
-                text += operators[i]
+    /// Updates screen display each time the user enter number or operator
+    private func updateScreenDisplay() {
+        var mathematicalExpression: String = ""
+        for (stringNumbersIndex, stringNumber) in stringNumbers.enumerated() {
+            // Add operator to display
+            if stringNumbersIndex > 0 {
+                mathematicalExpression += mathematicalOperators[stringNumbersIndex]
             }
-            // Add number
-            text += stringNumber
+            // Add number to display
+            mathematicalExpression += stringNumber
         }
-        textView.text = text
+        
+        calculatorScreenView.text = mathematicalExpression
     }
 
-    private func clear() {
+    /// Resets stringNumbers & operators to start new calculation
+    private func resetNumbersAndOperators() {
         stringNumbers = [String()]
-        operators = ["+"]
-        index = 0
+        mathematicalOperators = ["+"]
     }
 
-    /// Perform an operation according to the arithmetic symbol
-    ///
-    /// - Parameter mathematicalOperator: "+", "-", "x" or "/"
-    private func makeOperation(mathematicalOperator: String) {
-        operators.append(mathematicalOperator)
-        stringNumbers.append("")
-        updateDisplay()
-    }
-    
     /// Allows to customize an UIAlert
     ///
     /// - Parameters:

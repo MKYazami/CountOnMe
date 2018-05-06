@@ -249,7 +249,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="CT0-fb-Raf" id="Xeg-bt-oOS"/>
+                        <outlet property="calculatorScreenView" destination="CT0-fb-Raf" id="A79-XE-zmx"/>
                         <outletCollection property="numberButtons" destination="GgJ-QU-2gW" collectionClass="NSMutableArray" id="808-dp-a1w"/>
                         <outletCollection property="numberButtons" destination="6uw-jf-qlX" collectionClass="NSMutableArray" id="bHT-RM-Vdm"/>
                         <outletCollection property="numberButtons" destination="nZA-hS-XZt" collectionClass="NSMutableArray" id="5n6-DQ-x98"/>
