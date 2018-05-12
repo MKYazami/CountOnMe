@@ -9,5 +9,5 @@
 import Foundation
 
 protocol AlertMessage {
-    
+    func errorMessage(alertTitle: String, message: String, actionTitle: String)
 }
