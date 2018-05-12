@@ -160,13 +160,19 @@ class ViewController: UIViewController {
         mathematicalOperators = ["+"]
     }
 
+    
+    
+}
+
+extension ViewController: AlertMessage {
+    
     /// Allows to customize an UIAlert
     ///
     /// - Parameters:
     ///   - alertTitle: The title of the alert to present (As : error, warning…)
     ///   - message: Message explaining the error
     ///   - actionTitle: The title to present to valid the alert message (As : Ok, I understand…)
-    private func errorMessage(alertTitle: String, message: String, actionTitle: String) {
+    func errorMessage(alertTitle: String, message: String, actionTitle: String) {
         let alertMessage = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
         alertMessage.addAction(UIAlertAction(title: actionTitle, style: .cancel, handler: nil))
         self.present(alertMessage, animated: true, completion: nil)
