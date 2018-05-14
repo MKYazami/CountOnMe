@@ -69,6 +69,10 @@ class ViewController: UIViewController {
         calculatorScreenView.text = ""
         
         //Affecting delegates to self
+        delegatesSetUp()
+    }
+    
+    private func delegatesSetUp() {
         calculation.alertMessageDelegate = self
         calculation.updateDisplayDelegate = self
     }
