@@ -91,4 +91,14 @@ class CalculationTestCase: XCTestCase {
         
         XCTAssertEqual(calculation.canAddOperator, true)
     }
+    
+    func testGivenNumberEquals2AndOperatorIsMinus_WhenCallresetNumbersAndOperators_ThenstringNumbersIsEmptyAndmathematicalOperatorsIsPlus() {
+        calculation.stringNumbers = ["2"]
+        calculation.mathematicalOperators = ["-"]
+        
+        calculation.resetNumbersAndOperators()
+        
+        XCTAssertEqual(calculation.stringNumbers, [""])
+        XCTAssertEqual(calculation.mathematicalOperators, ["+"])
+    }
 }

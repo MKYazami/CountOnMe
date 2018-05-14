@@ -80,6 +80,12 @@ class Calculation {
         updateDisplayDelegate?.updateScreenDisplay()
     }
     
+    /// Resets stringNumbers & operators to start new calculation
+    func resetNumbersAndOperators() {
+        stringNumbers = [String()]
+        mathematicalOperators = ["+"]
+    }
+    
     /// Perform the total of calaculation
     ///
     /// - Parameters:

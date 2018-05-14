@@ -53,7 +53,7 @@ class ViewController: UIViewController {
 
     @IBAction private func clearScreenDisplay() {
         calculatorScreenView.text = ""
-        resetNumbersAndOperators()
+        calculation.resetNumbersAndOperators()
     }
     
     // MARK: - Properties
@@ -84,13 +84,7 @@ class ViewController: UIViewController {
         
         calculatorScreenView.text! += "\n=\n\(result)"
 
-        resetNumbersAndOperators()
-    }
-
-    /// Resets stringNumbers & operators to start new calculation
-    private func resetNumbersAndOperators() {
-        calculation.stringNumbers = [String()]
-        calculation.mathematicalOperators = ["+"]
+        calculation.resetNumbersAndOperators()
     }
  
 }
