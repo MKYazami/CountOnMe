@@ -25,50 +25,50 @@ class CalculationTestCase: XCTestCase {
         
         XCTAssertEqual(result, "2.0")
     }
-
+    
     func testGivenNumberEquals2_WhenSubtract1_ThenResultIs1() {
         calculation.addNewNumber(2)
         calculation.addMathematicalOperator(mathematicalOperator: "-")
         calculation.addNewNumber(1)
         let result = calculation.result
-
+        
         XCTAssertEqual(result, "1.0")
     }
-
+    
     func testGivenNumberEquals5_WhenMultiplyBy3_ThenResultIs15() {
         calculation.addNewNumber(5)
         calculation.addMathematicalOperator(mathematicalOperator: "x")
         calculation.addNewNumber(3)
         let result = calculation.result
-
+        
         XCTAssertEqual(result, "15.0")
     }
-
+    
     func testGivenNumberEquals20_WhenDivideBy4_ThenResultIs5() {
         calculation.addNewNumber(20)
         calculation.addMathematicalOperator(mathematicalOperator: "/")
         calculation.addNewNumber(4)
         let result = calculation.result
-
+        
         XCTAssertEqual(result, "5.0")
     }
-
+    
     func testGivenNumberEquals12_WhenDivideBy0_ThenResultIsError() {
         calculation.addNewNumber(12)
         calculation.addMathematicalOperator(mathematicalOperator: "/")
         calculation.addNewNumber(0)
         let result = calculation.result
-
+        
         XCTAssertEqual(result, "Error")
     }
     
-    func testGivenNoTappedNumber_WhenDontTapNumber_ThenExpressionIsNotCorrect() {
+    func testGivenNoTappedNumber_WhenPressEqualBtn_ThenExpressionIsNotCorrect() {
         calculation.stringNumbers = [""]
-
+        
         XCTAssertEqual(calculation.isExpressionCorrect, false)
     }
     
-    func testGivenTappedFisrtNumber_WhenDontTapSecondNumber_ThenExpressionIsNotCorrect() {
+    func testGivenTappedFisrtNumber_WhenDontTapSecondNumberAndPressEqualBtn_ThenExpressionIsNotCorrect() {
         calculation.stringNumbers = ["1", ""]
         
         XCTAssertEqual(calculation.isExpressionCorrect, false)
@@ -92,7 +92,7 @@ class CalculationTestCase: XCTestCase {
         XCTAssertEqual(calculation.canAddOperator, true)
     }
     
-    func testGivenNumberEquals2AndOperatorIsMinus_WhenCallresetNumbersAndOperators_ThenstringNumbersIsEmptyAndmathematicalOperatorsIsPlus() {
+    func testGivenNumberIs2AndOperatorIsMinus_WhenCallresetNumbersAndOperators_ThenstringNumbersIsEmptyAndmathematicalOperatorsIsPlus() {
         calculation.stringNumbers = ["2"]
         calculation.mathematicalOperators = ["-"]
         
