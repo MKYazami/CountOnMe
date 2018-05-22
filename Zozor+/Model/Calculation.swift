@@ -63,10 +63,11 @@ class Calculation {
     ///
     /// - Parameter newNumber: new number to add
     func addNewNumber(_ newNumber: Int) {
-        guard var stringNumber = stringNumbers.last else { return }
-        stringNumber += "\(newNumber)"
-        stringNumbers[stringNumbers.count-1] = stringNumber
-        
+        if var stringNumber = stringNumbers.last {
+            stringNumber += "\(newNumber)"
+            stringNumbers[stringNumbers.count-1] = stringNumber
+        }
+
         updateDisplayDelegate?.updateScreenDisplay()
     }
     
@@ -94,6 +95,8 @@ class Calculation {
     ///   - calculationExpression: The calculation expression done
     /// - Returns: The calculation expression & result in form of string
     private func performCalculation() -> String {
+        let errorMessage: String = "Error"
+        
         var result: Float = 0.0
         for (stringNumbersIndex, stringNumber) in stringNumbers.enumerated() {
             if let number = Float(stringNumber) {
@@ -109,10 +112,10 @@ class Calculation {
                     if checkDivisorIsNotZero(divisor: number) {
                         result /= number
                     } else {
-                        return "Error"
+                        return errorMessage
                     }
                 default:
-                    break
+                    return errorMessage
                 }
             }
         }

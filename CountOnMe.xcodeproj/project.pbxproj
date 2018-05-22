@@ -122,11 +122,11 @@
 			children = (
 				C926DADC1D7581BB00477020 /* AppDelegate.swift */,
 				9106C5A020A7427B002B6991 /* AlertMessage.swift */,
+				9106C5A220A786BD002B6991 /* UpdateDisplay.swift */,
 				918250D2209C4AB4005C94F2 /* Model */,
 				918250CF209C4A73005C94F2 /* View */,
 				918250D0209C4A96005C94F2 /* Controller */,
 				918250D3209C4B01005C94F2 /* SupportingFiles */,
-				9106C5A220A786BD002B6991 /* UpdateDisplay.swift */,
 			);
 			name = CountOnMe;
 			path = "Zozor+";

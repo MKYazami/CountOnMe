@@ -101,4 +101,13 @@ class CalculationTestCase: XCTestCase {
         XCTAssertEqual(calculation.stringNumbers, [""])
         XCTAssertEqual(calculation.mathematicalOperators, ["+"])
     }
+    
+    func testGivenFirstNumberEquals5_WhenMathematicalOperatorIsZAndSecondNumberEquals2_ThenResultIsError() {
+        calculation.addNewNumber(5)
+        calculation.addMathematicalOperator(mathematicalOperator: "Z")
+        calculation.addNewNumber(2)
+        let result = calculation.result
+        
+        XCTAssertEqual(result, "Error")
+    }
 }
